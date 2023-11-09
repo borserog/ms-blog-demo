@@ -1,0 +1,36 @@
+<div class="card w-96 shadow-xl bg-gradient-to-r from-slate-800 to-slate-700 h-full">
+    <div class="card-body">
+        <h2 class="card-title pb-1.5">{{ post.title }}</h2>
+        <ng-container *ngIf="comments$ | async as comments">
+            <div *ngIf="comments.length > 0; else noComment"
+                 class="p-3 h-full max-h-[170px] overflow-auto bg-gradient-to-r from-slate-400 to-slate-200 rounded-lg">
+                <ul class="pl-5">
+                    <li class="list-disc p-l text-slate-950" *ngFor="let comment of comments$ | async">
+                        {{ comment.content }}
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+
+        <div class="divider"></div>
+
+        <div>
+            <h2 class="pb-1">New comment</h2>
+            <form class="flex flex-row gap-2" (ngSubmit)="createComment(post.id)">
+                <input [formControl]="comment" type="text" class="input input-bordered max-w-xs">
+                <button
+                        class="btn btn-primary"
+                >
+                    Send
+                </button>
+            </form>
+        </div>
+
+        <div class="card-actions justify-end">
+        </div>
+    </div>
+</div>
+
+<ng-template #noComment>
+    <small class="w-full h-full max-h-[170px] text-center">No comments</small>
+</ng-template>
