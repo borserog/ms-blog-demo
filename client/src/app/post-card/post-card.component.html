@@ -5,7 +5,7 @@
             <div *ngIf="comments.length > 0; else noComment"
                  class="p-3 h-full max-h-[170px] overflow-auto bg-gradient-to-r from-slate-400 to-slate-200 rounded-lg">
                 <ul class="pl-5">
-                    <li class="list-disc p-l text-slate-950" *ngFor="let comment of comments$ | async">
+                    <li class="list-disc p-l text-slate-950" *ngFor="let comment of comments">
                         {{ comment.content }}
                     </li>
                 </ul>

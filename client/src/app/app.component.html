@@ -17,8 +17,10 @@
     <div class="divider"></div>
 
     <div class="flex flex-row gap-8">
-        <ng-container *ngFor="let post of (posts$ | async)! | keyvalue; let c = count">
-            <app-post-card [post]="post.value"></app-post-card>
+        <ng-container *ngIf="(posts$ | async) as posts">
+            <ng-container *ngFor="let post of posts | keyvalue">
+                <app-post-card [post]="post.value"></app-post-card>
+            </ng-container>
         </ng-container>
     </div>
 </main>
