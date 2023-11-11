@@ -12,7 +12,7 @@ import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 })
 export class PostCardComponent {
   @Input() post!: PostWithComments;
-  @Output() newCommentCreated = new EventEmitter<void>();
+  @Output() requestPostsReload = new EventEmitter<void>();
 
   readonly #postsService = inject(PostsService);
 
@@ -27,7 +27,11 @@ export class PostCardComponent {
   createComment(id: string) {
     this.#postsService.createComment(this.post.id, this.comment.value).subscribe(() => {
       this.comment.reset('');
-      this.newCommentCreated.emit();
+      this.requestPostsReload.emit();
     });
+  }
+
+  reload() {
+    this.requestPostsReload.emit();
   }
 }

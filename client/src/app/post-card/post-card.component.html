@@ -2,13 +2,19 @@
   <div class="card-body">
     <h2 class="card-title pb-1.5">{{ post.title }}</h2>
     <div *ngIf="post.comments.length > 0; else noComment"
-         class="p-3 h-full max-h-[170px] overflow-auto bg-gradient-to-r from-slate-400 to-slate-200 rounded-lg">
-      <ul class="pl-5">
-        <li class="list-disc p-l text-slate-950" *ngFor="let comment of post.comments">
-          {{ comment.content }}
+         class="p-3 gap-5 h-full max-h-[200px] overflow-auto bg-gradient-to-r from-slate-400 to-slate-200 rounded-lg">
+      <ul>
+        <li class="alert mb-1" *ngFor="let comment of post.comments">
+          <ng-container [ngSwitch]="comment.status">
+            <span *ngSwitchCase="'approved'">{{ comment.content }}</span>
+            <span *ngSwitchCase="'rejected'" class="badge badge-error italic">Comment rejected</span>
+            <span *ngSwitchDefault class="badge badge-warning italic">Moderation pending...</span>
+          </ng-container>
         </li>
       </ul>
     </div>
+    <small class="cursor-pointer text-end" (click)="reload()">Reload</small>
+
 
     <div class="divider"></div>
 
