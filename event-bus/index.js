@@ -12,7 +12,7 @@ app.post('/events', (req, res) => {
 
     axios.post(getMsUrl(0), event);
     axios.post(getMsUrl(1), event);
-    axios.post(getMsUrl(2), event);
+    // // axios.post(getMsUrl(2), event);
 
     res.send({status: 'OK'});
 });
