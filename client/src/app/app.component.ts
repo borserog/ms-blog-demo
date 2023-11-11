@@ -7,24 +7,27 @@ import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PostCardComponent} from "./post-card/post-card.component";
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    imports: [CommonModule, RouterOutlet, FormsModule, ReactiveFormsModule, PostCardComponent],
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, FormsModule, ReactiveFormsModule, PostCardComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    readonly #postsService = inject(PostsService);
-    readonly #loadPosts$ = new Subject<void>();
-    newPost = new FormControl('');
-    posts$: Observable<Posts> = this.#loadPosts$.pipe(
-        startWith(null),
-        switchMap(() => {
-            return this.#postsService.getPosts();
-        })
-    )
-  
-    createPost(title: string | null) {
-        this.#postsService.createPost(title || '-').subscribe(() => this.#loadPosts$.next());
-    }
+  readonly #postsService = inject(PostsService);
+  readonly #loadPosts$ = new Subject<void>();
+  newPost = new FormControl('');
+  posts$: Observable<Posts> = this.#loadPosts$.pipe(
+    startWith(null),
+    switchMap(() => {
+      return this.#postsService.getPosts();
+    })
+  )
+
+  createPost(title: string | null) {
+    this.#postsService.createPost(title || '-').subscribe(() => {
+      this.newPost.reset('');
+      this.#loadPosts$.next()
+    });
+  }
 }
