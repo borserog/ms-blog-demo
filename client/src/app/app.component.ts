@@ -30,4 +30,8 @@ export class AppComponent {
       this.#loadPosts$.next()
     });
   }
+
+  onNewComment() {
+    this.#loadPosts$.next();
+  }
 }
