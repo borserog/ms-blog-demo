@@ -10,6 +10,7 @@ export interface Post {
 export interface PostComment {
   id: string;
   content: string;
+  status: 'approved' | 'rejected' | 'pending'
 }
 
 export interface PostWithComments extends Post {
