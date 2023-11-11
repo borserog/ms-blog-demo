@@ -29,7 +29,7 @@ app.post('/posts', async (req, res) => {
             id,
             title
         }
-    })
+    }).catch(err => console.warn(err))
 
     // 201 resource created
     res.status(201).send(posts[id]);

@@ -33,7 +33,7 @@ app.post('/posts/:id/comments', async (req, res) => {
             postId: req.params.id,
             status: 'pending'
         }
-    })
+    }).catch(err => console.warn(err))
 
     // 201 resource created
     res.status(201).send(comments);
@@ -57,7 +57,7 @@ app.post('/events', async (req, res) => {
         await axios.post('http://localhost:4005/events', {
             type: 'CommentUpdated',
             data: {...data}
-        })
+        }).catch(err => console.warn(err))
     }
 
     res.send({});
