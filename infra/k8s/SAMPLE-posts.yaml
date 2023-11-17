@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: posts
+spec:
+  containers:
+    - name: posts
+      #      k8s will look for images with no version in docker hub
+      image: ms-course/posts:0.0.1
