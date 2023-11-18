@@ -7,17 +7,17 @@ app.use(bodyParser.json());
 
 const events = [];
 
-const getMsUrl = (num) => `http://localhost:400${num}/events`;
+const getMsUrl = (num, root = ) => `http://${root}:400${num}/events`;
 
 app.post('/events', (req, res) => {
     const event = req.body;
 
     events.push(event);
 
-    axios.post(getMsUrl(0), event).catch(err => console.warn(err));
-    axios.post(getMsUrl(1), event).catch(err => console.warn(err));
-    axios.post(getMsUrl(2), event).catch(err => console.warn(err))
-    axios.post(getMsUrl(3), event).catch(err => console.warn(err));
+    axios.post(getMsUrl(0, `posts-clusterip-srv`), event).catch(err => console.warn(err));
+    axios.post(getMsUrl(1, `comments-srv`), event).catch(err => console.warn(err));
+    axios.post(getMsUrl(2, `query-srv`), event).catch(err => console.warn(err))
+    axios.post(getMsUrl(3, `moderation-srv`), event).catch(err => console.warn(err));
 
 
     res.send({status: 'OK'});

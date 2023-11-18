@@ -25,9 +25,10 @@ export interface Posts {
   providedIn: 'root'
 })
 export class PostsService {
-  private readonly POSTS_URL_API = `http://localhost:4000/posts`;
-  private readonly COMMENTS_URL_API = `http://localhost:4001/posts/:id/comments`;
-  private readonly QUERY_URL_API = `http://localhost:4002/posts`;
+  private readonly ORIGIN = "http://posts.com/";
+  private readonly POSTS_CREATE_URL_API = `${this.ORIGIN}/posts/create`;
+  private readonly COMMENTS_URL_API = `${this.ORIGIN}/posts/:id/comments`;
+  private readonly QUERY_URL_API = `${this.ORIGIN}/posts`;
   private readonly http = inject(HttpClient);
 
   getPosts(): Observable<Posts> {
@@ -35,7 +36,7 @@ export class PostsService {
   }
 
   createPost(title: string): Observable<Post> {
-    return this.http.post<Post>(this.POSTS_URL_API, {title});
+    return this.http.post<Post>(this.POSTS_CREATE_URL_API, {title});
   }
 
   createComment(postId: string, content: string) {

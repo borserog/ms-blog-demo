@@ -38,3 +38,18 @@ microservices.
    cd microservices-nodejs-angular
    ```
 
+## Useful Commands I've learned
+
+1. Build image and push it to Docker Hub:
+
+   ```bash
+   docker build -t <docker-hub-id>/<image-name>:<optional-tag> .
+   docker push <docker-hub-id>/<image-name>:<optional-tag>
+   ```
+
+2. Restart a deployment
+
+   ```bash
+   kubectl rollout restart deployment <deployment-name> 
+   ```
+
