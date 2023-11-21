@@ -7,11 +7,12 @@ app.use(bodyParser.json());
 
 const events = [];
 
-const getMsUrl = (num, root = ) => `http://${root}:400${num}/events`;
+const getMsUrl = (num, root) => `http://${root}:400${num}/events`;
 
 app.post('/events', (req, res) => {
     const event = req.body;
 
+    console.log(event);
     events.push(event);
 
     axios.post(getMsUrl(0, `posts-clusterip-srv`), event).catch(err => console.warn(err));

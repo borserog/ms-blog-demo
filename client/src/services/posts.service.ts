@@ -25,7 +25,7 @@ export interface Posts {
   providedIn: 'root'
 })
 export class PostsService {
-  private readonly ORIGIN = "http://posts.com/";
+  private readonly ORIGIN = "http://posts.com";
   private readonly POSTS_CREATE_URL_API = `${this.ORIGIN}/posts/create`;
   private readonly COMMENTS_URL_API = `${this.ORIGIN}/posts/:id/comments`;
   private readonly QUERY_URL_API = `${this.ORIGIN}/posts`;

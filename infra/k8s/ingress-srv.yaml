@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-srv
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   #  this is what will make ingress understand the routing rules
   ingressClassName: nginx
@@ -9,6 +11,7 @@ spec:
     - host: posts.com
       http:
         paths:
+          #         the order of the paths matter, it returns the first match
           - path: /posts/create
             pathType: ImplementationSpecific
             backend:
@@ -16,3 +19,25 @@ spec:
                 name: posts-clusterip-srv
                 port:
                   number: 4000
+          - path: /posts
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: query-srv
+                port:
+                  number: 4002
+          - path: /posts/?(.*)/comments
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: comments-srv
+                port:
+                  number: 4001
+          #          matches anything
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 81
