@@ -15,13 +15,7 @@ export class PostCardComponent {
   @Output() requestPostsReload = new EventEmitter<void>();
 
   readonly #postsService = inject(PostsService);
-
-  // comments$: Observable<PostComment[]> = this.#loadComments.pipe(
-  //     startWith(null),
-  //     switchMap(() => {
-  //         return this.#postsService.getComments(this.post.id);
-  //     })
-  // );
+  
   comment = new FormControl();
 
   createComment(id: string) {
