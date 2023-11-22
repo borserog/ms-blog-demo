@@ -18,13 +18,9 @@ This course covers the fundamentals of building microservices using Node.js and 
 Angular, providing an alternative perspective for those comfortable with Angular or interested in learning it alongside
 microservices.
 
-## Repository Structure
+## Running the Project
 
-- **/src:** Contains the source code for the Angular implementation.
-- **/examples:** Includes practical examples and exercises.
-- **/projects:** Houses larger projects built during the course.
-
-## Getting Started
+This guide assumes that Docker and Kubernetes are already installed in your local machine.
 
 1. Clone the repository:
 
@@ -32,24 +28,20 @@ microservices.
    git clone https://github.com/your-username/microservices-nodejs-angular.git
    ```
 
-2. Navigate to each service directory:
+2. Download and Install Skaffold [here](https://skaffold.dev/):
+
+
+3. Add `127.0.0.1 posts.com` to your OS' hosts file
+    - MacOS/Linux: `/etc/hosts`
+    - Windows:  `C:\Windows\System32\drivers\etc\hosts`
+
+
+4. Run the following command on the project's root directory:
 
    ```bash
-   cd microservices-nodejs-angular
+   $ skaffold dev
    ```
 
-## Useful Commands I've learned
+5. Access the Angular application by adding `posts.com` to your browser's address bar.
 
-1. Build image and push it to Docker Hub:
-
-   ```bash
-   docker build -t <docker-hub-id>/<image-name>:<optional-tag> .
-   docker push <docker-hub-id>/<image-name>:<optional-tag>
-   ```
-
-2. Restart a deployment
-
-   ```bash
-   kubectl rollout restart deployment <deployment-name> 
-   ```
 
